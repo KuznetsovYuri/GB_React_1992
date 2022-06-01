@@ -1,0 +1,19 @@
+/* Модульные стили */
+
+.bcg {
+    font-style: italic;
+    font-family: Verdana;
+    background-color: aqua;
+}
+
+.cover {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.btn {
+
+    width: 90px;
+    height: 50px;
+
+}
