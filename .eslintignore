@@ -1,0 +1,10 @@
+.history
+/.vscode
+/.git
+node_modules
+coverage
+reports
+storybook-static
+dist
+presa
+build
