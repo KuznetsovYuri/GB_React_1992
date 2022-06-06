@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es6: true,
     node: true,
   },
   extends: [
@@ -23,7 +23,7 @@ module.exports = {
     semi: ["error", "always"],
     quotes: ["error", "double"],
     "react/react-in-jsx-scope": "off",
-    "prettier/prettier": "error",
+    "prettier/prettier": "off",
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
   },

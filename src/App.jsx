@@ -4,9 +4,6 @@ import { useState } from "react";
 import { AUTHOR } from "./constants";
 import { Form } from "./components/Form";
 
-// import style from "./components/func/Form.module.css";
-
-
 export const App = () => {
   const [messages, setMessages] = useState([]);
   const addMessage = (newMessage) => {
@@ -17,22 +14,22 @@ export const App = () => {
     if (messages.length > 0 && messages[messages.length - 1].author === AUTHOR.user) {
       const timeout = setTimeout(() => {
         addMessage({
-        author: AUTHOR.bot,
-        text: "I'm bot"
-      })
-    },
-       1000);
+          author: AUTHOR.bot,
+          text: "I'm bot"
+        });
+      },
+        1000);
       return () => {
         clearTimeout(timeout);
-      }; 
+      };
     }
-  }, [messages])
+  }, [messages]);
 
   return (
     <>
-    <MessageList messages={messages} />
-      <Form addMessage={addMessage}/>
+      <MessageList messages={messages} />
+      <Form addMessage={addMessage} />
     </>
-      
+
   );
 };
