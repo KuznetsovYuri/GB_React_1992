@@ -1,11 +1,11 @@
 {
-  "main.js": "/static/js/main.e67fd7c8.chunk.js",
-  "main.js.map": "/static/js/main.e67fd7c8.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-  "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-  "static/js/2.557f09af.chunk.js": "/static/js/2.557f09af.chunk.js",
-  "static/js/2.557f09af.chunk.js.map": "/static/js/2.557f09af.chunk.js.map",
-  "index.html": "/index.html",
-  "precache-manifest.79565f0a222cc66db055d9d0d887f8db.js": "/precache-manifest.79565f0a222cc66db055d9d0d887f8db.js",
-  "service-worker.js": "/service-worker.js"
+  "main.js": "/GB_React_1992/static/js/main.e67fd7c8.chunk.js",
+  "main.js.map": "/GB_React_1992/static/js/main.e67fd7c8.chunk.js.map",
+  "runtime~main.js": "/GB_React_1992/static/js/runtime~main.e7d988f4.js",
+  "runtime~main.js.map": "/GB_React_1992/static/js/runtime~main.e7d988f4.js.map",
+  "static/js/2.557f09af.chunk.js": "/GB_React_1992/static/js/2.557f09af.chunk.js",
+  "static/js/2.557f09af.chunk.js.map": "/GB_React_1992/static/js/2.557f09af.chunk.js.map",
+  "index.html": "/GB_React_1992/index.html",
+  "precache-manifest.424020face7c2d417ad2859fac867b73.js": "/GB_React_1992/precache-manifest.424020face7c2d417ad2859fac867b73.js",
+  "service-worker.js": "/GB_React_1992/service-worker.js"
 }
