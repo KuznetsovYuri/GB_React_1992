@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AUTHOR } from "../constants";
+import style from './Form.module.scss';
 
 // eslint-disable-next-line react/prop-types
 export const Form = ({ addMessage }) => {
@@ -13,7 +14,7 @@ export const Form = ({ addMessage }) => {
         setText("");
     };
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={style.form}>
             <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
             <button>Send</button>
         </form>
