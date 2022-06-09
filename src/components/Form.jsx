@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { AUTHOR } from "../constants";
 import style from './Form.module.scss';
+import { Button } from "./Button/Button";
+import TextField from '@mui/material/TextField';
 
-// eslint-disable-next-line react/prop-types
+
 export const Form = ({ addMessage }) => {
     const [text, setText] = useState("");
     const handleSubmit = (e) => {
@@ -15,8 +17,10 @@ export const Form = ({ addMessage }) => {
     };
     return (
         <form onSubmit={handleSubmit} className={style.form}>
-            <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
-            <button>Send</button>
+            
+                <TextField autoFocus={true} type="text" value={text} onChange={(e) => setText(e.target.value)} />
+
+            <Button label="send" />
         </form>
 
 

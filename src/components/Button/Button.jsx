@@ -1,8 +1,8 @@
+import MUIButton from '@mui/material/Button';
 export const Button = ({ label, disabled = false, click = () => null }) => {
     return (
-      <button disabled={disabled} onClick={click}>
-        {label}
-      </button>
+        <MUIButton disabled={disabled} onClick={click} variant="contained" type="submit">
+            {label}
+        </MUIButton>
     );
-  };
-  
+};
