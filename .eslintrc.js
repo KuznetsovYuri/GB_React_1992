@@ -33,12 +33,12 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'linebreak-style': ['error', 'unix'],
     'prettier/prettier': [
-      'error',
+      'off',
       {
         singleQuote: true,
       },
     ],
-    quotes: ['warn', 'single'],
+    quotes: [2, 'single', { 'avoidEscape': true }],
     'react/display-name': 'off',
     'react/prop-types': 0,
     semi: ['warn', 'always'],
