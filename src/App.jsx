@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
-import { MessageList } from "./components/MessageList";
-import { useState } from "react";
-import { AUTHOR } from "./constants";
-import { Form } from "./components/Form";
+import React, { useEffect } from 'react';
+import { MessageList } from './components/MessageList';
+import { useState } from 'react';
+import { AUTHOR } from './constants';
+import { Form } from './components/Form';
+import style from './index.module.scss';
+import RenderChatslist from './components/Chats/ChatsList';
 
 export const App = () => {
   const [messages, setMessages] = useState([]);
@@ -26,10 +28,27 @@ export const App = () => {
   }, [messages]);
 
   return (
+
     <>
-      <MessageList messages={messages} />
-      <Form addMessage={addMessage} />
+      <main className={style.main}>
+        <div className={style.wrap}>
+          <div className={style.chats}> <RenderChatslist/> </div>
+          <div className={style.coverChat}>
+            <div>
+              <MessageList messages={messages} />
+            </div>
+
+            <div className={style.messages}>
+              <Form addMessage={addMessage} />
+            </div>
+          </div>
+        </div>
+      </main>
+
     </>
+
+
+
 
   );
 };

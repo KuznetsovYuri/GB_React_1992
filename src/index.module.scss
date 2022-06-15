@@ -1,0 +1,53 @@
+.coverChat {
+    height: 90vh;
+    width: 90vh;
+    border: 1px solid rgb(78, 149, 207);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto;
+    background-color: rgb(253, 246, 237);
+}
+
+
+.bot {
+    background-color: aqua;
+}
+
+.messages {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.wrap {
+    display: flex;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.chatMessage {
+    list-style: none;
+    background-color: aqua;
+    margin-bottom: 20px;
+    display: block;
+    max-width: 70%;
+    width: fit-content;
+    padding: 10px 30px 10px 10px;
+    border-radius: 10px;
+
+
+    &__my {
+        margin-left: auto;
+        color: whitesmoke;
+        background-color: rgb(97, 14, 213);
+        padding-left: auto;
+        margin-right: 30px;
+    }
+}
+
+.chats {
+    border: 1px solid rgb(129, 129, 129);
+    width: 30vh;
+}

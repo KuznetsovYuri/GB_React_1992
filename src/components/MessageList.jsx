@@ -1,13 +1,23 @@
-/* eslint-disable react/prop-types */
-import React from "react";
+import React from 'react';
+import { AUTHOR } from '../constants';
+import style from '../index.module.scss';
 
-// eslint-disable-next-line react/prop-types
+const isMyMessage = (author) => (author === AUTHOR.user ? true : false);
+
 export const MessageList = ({ messages }) => {
   return (
     <ul>
-      {messages.map ((message, idx) => (
-        <li key={idx}>
-          {message.author}: {message.text}
+      {messages.map((message, idx) => (
+        <li
+          className={
+            style['chatMessage'] + (isMyMessage(message.author) ? ' ' + style['chatMessage__my'] : '')
+            
+          }
+          key={idx}>
+            <div>{message.author + ':'}</div>
+
+            <div>{message.text}</div>
+           
         </li>
       ))}
     </ul>
