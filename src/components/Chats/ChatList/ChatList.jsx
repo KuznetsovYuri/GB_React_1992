@@ -3,13 +3,15 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Chats } from './Chats';
 
-console.log(Chats);
 
 export default function RenderChatslist() {
+
+
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+
   };
 
   return (
@@ -28,9 +30,6 @@ export default function RenderChatslist() {
         <ListItemText primary={Chats[1].name} />
       </ListItemButton>
     </>
-
-
-
 
   );
 
