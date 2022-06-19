@@ -38,7 +38,7 @@ module.exports = {
         singleQuote: true,
       },
     ],
-    quotes: [2, 'double', 'single', { 'avoidEscape': true }],
+    quotes: [2, 'single', { 'avoidEscape': true }],
     'react/display-name': 'off',
     'react/prop-types': 0,
     semi: ['warn', 'always'],

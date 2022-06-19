@@ -6,6 +6,7 @@ export const Button = ({ disabled = false, click = () => null }) => {
         <MUIButton
             disabled={disabled}
             onClick={click}
+            data-testid="submitbutton"
             variant="contained"
             type="submit"
             endIcon={<SendIcon />}>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { AUTHOR } from '../constants';
-import style from './Form.module.scss';
-import { Button } from './Button/Button';
+import { AUTHOR } from '../../constants';
+import { Button } from '../Button/Button';
 import TextField from '@mui/material/TextField';
 
 
@@ -17,7 +16,7 @@ export const Form = ({ addMessage }) => {
         setText('');
     };
     return (
-        <form onSubmit={handleSubmit} className={style.form}>
+        <form onSubmit={handleSubmit}>
 
             <TextField
                 label={AUTHOR.user}
