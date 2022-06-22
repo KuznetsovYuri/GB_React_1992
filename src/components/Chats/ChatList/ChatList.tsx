@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Chats } from './Chats';
 
 
-export default function RenderChatslist() {
+export const RenderChatslist = () => {
 
 
   const [selectedIndex, setSelectedIndex] = React.useState(1);

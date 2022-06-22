@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { AUTHOR } from '../../constants';
 import { Button } from '../Button/Button';
 import TextField from '@mui/material/TextField';
+import { Message } from '../../types';
 
 
+interface FormProps {
+    addMessage: (msg: Message) => void
+}
 
-export const Form = ({ addMessage }) => {
+export const Form: FC<FormProps> = ({ addMessage }) => {
     const [text, setText] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -29,7 +33,7 @@ export const Form = ({ addMessage }) => {
                 value={text}
                 onChange={(e) => setText(e.target.value)} />
 
-            <Button />
+            <Button label={''} />
 
 
         </form>

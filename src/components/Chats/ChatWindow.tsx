@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { AUTHOR } from '../../constants';
-import { MessageList } from '../../components/MessageList';
+import { MessageList } from '../MessageList';
 import { Form } from '../Form/Form';
 import style from './ChatWindow.module.scss';
 
+interface ChatWindowProps {
+  author: string;
+  text: string;
+}
 
-export const ChatWindow = () => {
-    const [messages, setMessages] = useState([]);
-    const addMessage = (newMessage) => {
+const msg: Array<ChatWindowProps> = [];
+
+
+export const ChatWindow: FC = () => {
+    const [messages, setMessages] = useState<ChatWindowProps[]>(msg);;
+    const addMessage = (newMessage: ChatWindowProps) => {
       setMessages([...messages, newMessage]);
     };
   

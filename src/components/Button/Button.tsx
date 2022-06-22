@@ -1,13 +1,17 @@
+import { FC } from 'react';
 import MUIButton from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 
+interface ButtonProps {
+    label: string,
+    disabled?: boolean,
 
+}
 
-export const Button = ({ disabled = false, click = () => null }) => {
+export const Button: FC<ButtonProps> = ({ label, disabled = false }) => {
     return (
         <MUIButton
             disabled={disabled}
-            onClick={click}
             data-testid="submitbutton"
             variant="contained"
             type="submit"
