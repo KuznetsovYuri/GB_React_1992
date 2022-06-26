@@ -1,17 +1,18 @@
-import React, { FC, useState } from 'react';
+import React, { memo, FC, useState } from 'react';
 import { AUTHOR } from '../../constants';
 import { Button } from '../Button/Button';
 import TextField from '@mui/material/TextField';
-import { Message } from '../../types';
+import { Message } from '../../common-types';
 
 
 interface FormProps {
     addMessage: (msg: Message) => void
 }
 
-export const Form: FC<FormProps> = ({ addMessage }) => {
+export const Form: FC<FormProps> = memo(({ addMessage }) => {
     const [text, setText] = useState('');
-    const handleSubmit = (e) => {
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         addMessage({
             author: AUTHOR.user,
@@ -19,6 +20,7 @@ export const Form: FC<FormProps> = ({ addMessage }) => {
         });
         setText('');
     };
+
     return (
         <form onSubmit={handleSubmit}>
 
@@ -31,13 +33,15 @@ export const Form: FC<FormProps> = ({ addMessage }) => {
                 sx={{ mr: 2, mb: 2, bgcolor: 'background.paper' }}
                 type="text"
                 value={text}
-                onChange={(e) => setText(e.target.value)} />
+                onChange={(e) => setText(e.target.value)}
+                inputProps={{
+                    'data-testid': 'input',
+                }} />
 
-            <Button label={''} />
-
-
+            <Button render={() => <span>send</span>} />
         </form>
 
     );
 
-};
+}
+);

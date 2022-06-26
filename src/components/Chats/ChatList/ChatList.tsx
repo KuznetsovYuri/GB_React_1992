@@ -1,37 +1,49 @@
-import React, { FC } from 'react';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import { Chats } from './Chats';
+import { FC, useState } from 'react';
+import { nanoid } from 'nanoid';
+import { ListItem } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Chat } from '../../../common-types';
 
+interface ChatListProps {
+  chats: Chat[];
+  onAddChat: (chat: Chat) => void;
+}
 
-export const RenderChatslist = () => {
+export const ChatList: FC<ChatListProps> = ({ chats, onAddChat }) => {
+  const [value, setValue] = useState('');
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
+    if (value) {
+      onAddChat({
+        id: nanoid(),
+        name: value,
+      });
 
+      setValue('');
+    }
   };
 
   return (
-
     <>
-      <ListItemButton
-        selected={selectedIndex === 2}
-        onClick={(event) => handleListItemClick(event, 2)}
-      >
-        <ListItemText primary={Chats[0].name} />
-      </ListItemButton>
-      <ListItemButton
-        selected={selectedIndex === 3}
-        onClick={(event) => handleListItemClick(event, 3)}
-      >
-        <ListItemText primary={Chats[1].name} />
-      </ListItemButton>
+      <ul>
+        {chats.map((chat) => (
+          <ListItem key={chat.id}>
+            <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
+          </ListItem>
+        ))}
+      </ul>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={value} onChange={handleChange} />
+        <button>Create Chat</button>
+      </form>
     </>
-
   );
+};
 
-}
 

@@ -1,49 +1,81 @@
-import React, { FC, useEffect, useState } from 'react';
-import { AUTHOR } from '../../constants';
-import { MessageList } from '../MessageList';
-import { Form } from '../Form/Form';
-import style from './ChatWindow.module.scss';
+import React, { useMemo, FC, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { nanoid } from 'nanoid';
+import { Authors, Chat, Message, Messages } from '../../common-types';
+import { Header } from '../Header';
+import { Main } from '../../pages/Main';
+import { Profile } from '../../pages/Profile';
+import { ChatList } from '../Chats/ChatList/ChatList';
+import { ChatPage } from '../../pages/Pages';
 
-interface ChatWindowProps {
-  author: string;
-  text: string;
-}
 
-const msg: Array<ChatWindowProps> = [];
+const defaultMessages: Messages = {
+  default: [
+    {
+      author: Authors.USER,
+      text: '1',
+    },
+    {
+      author: Authors.USER,
+      text: '2',
+    },
+  ],
+};
 
 
 export const ChatWindow: FC = () => {
-    const [messages, setMessages] = useState<ChatWindowProps[]>(msg);;
-    const addMessage = (newMessage: ChatWindowProps) => {
-      setMessages([...messages, newMessage]);
-    };
-  
-    useEffect(() => {
-      if (messages.length > 0 && messages[messages.length - 1].author === AUTHOR.user) {
-        const timeout = setTimeout(() => {
-          addMessage({
-            author: AUTHOR.bot,
-            text: "I'm bot"
-          });
-        },
-          1000);
-        return () => {
-          clearTimeout(timeout);
-        };
-      }
-    }, [messages]);
-  
-    return (
-  
-      <>
-            <div>
-              <MessageList messages={messages} />
-            </div>
-            <div className={style.messages}>
-              <Form addMessage={addMessage} />
-            </div>
-  
-      </>
-  
-    );
+  const [messages, setMessages] = useState(defaultMessages);
+
+  const chats = useMemo(
+    () =>
+      Object.keys(messages).map((chat) => ({
+        id: nanoid(),
+        name: chat,
+      })),
+    [Object.keys(messages).length]
+  );
+
+  const onAddChat = (newChat: Chat) => {
+    setMessages({
+      ...messages,
+      [newChat.name]: [],
+    });
   };
+
+  const onAddMessage = (chatId: string, newMessage: Message) => {
+    setMessages({
+      ...messages,
+      [chatId]: [...messages[chatId], newMessage],
+    });
+  };
+
+  return (
+
+    <Routes>
+      <Route path="/" element={<Header />}>
+        <Route index element={<Main />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="chats">
+          <Route
+            index
+            element={<ChatList chats={chats} onAddChat={onAddChat} />}
+          />
+          <Route
+            path=":chatId"
+            element={
+              <ChatPage
+                chats={chats}
+                onAddChat={onAddChat}
+                messages={messages}
+                onAddMessage={onAddMessage}
+              />
+            }
+          />
+        </Route>
+      </Route>
+
+      <Route path="*" element={<h2>404 page</h2>} />
+    </Routes>
+
+  );
+};
