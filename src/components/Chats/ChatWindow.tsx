@@ -4,9 +4,20 @@ import { nanoid } from 'nanoid';
 import { Authors, Chat, Message, Messages } from '../../common-types';
 import { Header } from '../Header';
 import { Main } from '../../pages/Main';
-import { Profile } from '../../pages/Profile';
+// import { Profile } from '../../pages/Profile';
 import { ChatList } from '../Chats/ChatList/ChatList';
 import { ChatPage } from '../../pages/Pages';
+
+const Profile = React.lazy(() =>
+  Promise.all([
+    import('../../pages/Profile').then(({ Profile }) => ({
+      default: Profile,
+    })),
+    new Promise((resolve) => setTimeout(resolve, 2000)),
+
+  ]).then(([moduleExports]) => moduleExports)
+
+);
 
 
 const defaultMessages: Messages = {
@@ -50,7 +61,7 @@ export const ChatWindow: FC = () => {
   };
 
   const onDeleteChat = (name: string) => {
-    const newMessages = { ...messages};
+    const newMessages = { ...messages };
     delete newMessages[name];
     setMessages(newMessages);
   };
