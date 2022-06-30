@@ -45,12 +45,12 @@ export const ChatPage: FC<ChatPageProps> = ({
   }, [chatId, messages]);
 
   const handleAddMessage = useCallback(
-    (mesasge: Message) => {
+    (message: Message) => {
       if (chatId) {
-        onAddMessage(chatId, mesasge);
+        onAddMessage(chatId, message);
       }
     },
-    [chatId]
+    [chatId, onAddMessage]
   );
 
   if (chatId && !messages[chatId]) {
@@ -59,7 +59,7 @@ export const ChatPage: FC<ChatPageProps> = ({
 
   return (
     <>
-      <ChatList chats={chats} onAddChat={onAddChat} onDeleteChat={onDeleteChat}/>
+      <ChatList chats={chats} onAddChat={onAddChat} onDeleteChat={onDeleteChat} />
       <MessageList messages={chatId ? messages[chatId] : []} />
       <Form addMessage={handleAddMessage} />
     </>

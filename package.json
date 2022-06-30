@@ -14,7 +14,9 @@
     "nanoid": "^4.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
+    "redux": "^4.2.0",
     "styled-components": "^5.3.5"
   },
   "scripts": {
@@ -104,6 +106,7 @@
     "loki": "^0.30.2",
     "mini-css-extract-plugin": "^2.6.0",
     "prettier": "^2.6.2",
+    "redux-devtools": "^3.7.0",
     "sass": "^1.52.1",
     "sass-loader": "^13.0.0",
     "style-loader": "^3.3.1",
