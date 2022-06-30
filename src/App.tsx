@@ -1,7 +1,7 @@
 import React, { FC, Suspense, useState } from 'react';
 import { Provider } from 'react-redux';
 import { ChatWindow } from './components/Chats/ChatWindow';
-import { store } from './store';
+import { store } from './store/index';
 import { defaultContext, ThemeContext } from './utils/ThemeContext';
 
 
@@ -15,14 +15,14 @@ export const App: FC = () => {
 
   return (
     <Provider store={store}>
-    <Suspense fallback={<div>Loading...</div>}>
-      <ThemeContext.Provider value={{
-        theme,
-        toggleTheme,
-      }}>
-      <ChatWindow />
-      </ThemeContext.Provider>
-    </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ThemeContext.Provider value={{
+          theme,
+          toggleTheme,
+        }}>
+          <ChatWindow />
+        </ThemeContext.Provider>
+      </Suspense>
     </Provider>
   );
 };
