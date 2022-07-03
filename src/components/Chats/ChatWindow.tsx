@@ -7,6 +7,7 @@ import { ChatList } from '../Chats/ChatList/ChatList';
 import { ChatPage } from '../../pages/Pages';
 import { useDispatch } from 'react-redux';
 import { addChat, addMessage, deleteChat } from '../../store/messages/actions';
+import { AboutWithConnect } from '../../pages/About';
 
 const Profile = React.lazy(() =>
   Promise.all([
@@ -35,6 +36,7 @@ export const ChatWindow: FC = () => {
       <Route path="/" element={<Header />}>
         <Route index element={<Main />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="about" element={<AboutWithConnect />} />
         <Route path="chats">
           <Route
             index
@@ -48,7 +50,6 @@ export const ChatWindow: FC = () => {
           />
         </Route>
       </Route>
-
       <Route path="*" element={<h2>404 page</h2>} />
     </Routes>
 

@@ -1,9 +1,7 @@
 import { ListItem } from '@mui/material';
-import { nanoid } from 'nanoid';
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { StoreState } from '../../../store';
 import { addChat, deleteChat } from '../../../store/messages/actions';
 import { selectChats } from '../../../store/messages/selectors';
 
@@ -19,17 +17,11 @@ export const ChatList: FC = () => {
     console.log('chat changed')
   }, [chats])
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (value) {
       dispatch(addChat(value));
-      
-
       setValue('');
     }
   };
@@ -45,7 +37,7 @@ export const ChatList: FC = () => {
         ))}
       </ul>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={value} onChange={handleChange} />
+        <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
         <button>Create Chat</button>
       </form>
     </>
