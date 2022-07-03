@@ -1,17 +1,22 @@
-import { FC, useState } from 'react';
-import { nanoid } from 'nanoid';
 import { ListItem } from '@mui/material';
+import { nanoid } from 'nanoid';
+import { FC, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Chat } from '../../../common-types';
+import { StoreState } from '../../../store';
+import { addChat, deleteChat } from '../../../store/messages/actions';
 
-interface ChatListProps {
-  chats: Chat[];
-  onAddChat: (chat: Chat) => void;
-  onDeleteChat: (name: string) => void;
-}
-
-export const ChatList: FC<ChatListProps> = ({ chats, onAddChat, onDeleteChat }) => {
+export const ChatList: FC = () => {
   const [value, setValue] = useState('');
+
+  const dispatch = useDispatch();
+
+  const chats = useSelector((state: StoreState) => 
+    Object.keys(state.messages).map((chat) => ({
+      id: nanoid(),
+      name: chat,
+    }))  
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -21,10 +26,8 @@ export const ChatList: FC<ChatListProps> = ({ chats, onAddChat, onDeleteChat }) 
     e.preventDefault();
 
     if (value) {
-      onAddChat({
-        id: nanoid(),
-        name: value,
-      });
+      dispatch(addChat(value));
+      
 
       setValue('');
     }
@@ -36,7 +39,7 @@ export const ChatList: FC<ChatListProps> = ({ chats, onAddChat, onDeleteChat }) 
         {chats.map((chat) => (
           <ListItem key={chat.id}>
             <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
-            <button onClick={() => onDeleteChat(chat.name)}>X</button>
+            <button onClick={() => dispatch(deleteChat(chat.name))}>X</button>
           </ListItem>
         ))}
       </ul>
