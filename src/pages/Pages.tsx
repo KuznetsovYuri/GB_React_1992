@@ -3,13 +3,13 @@ import { Form } from '../components/Form/Form';
 import { MessageList } from '../components/MessageList';
 import { ChatList } from '../components/Chats/ChatList/ChatList';
 import { Navigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { StoreState } from '../store';
+import { shallowEqual, useSelector } from 'react-redux';
+import { selectMessages } from '../store/messages/selectors';
 
 export const ChatPage: FC = () => {
   const { chatId } = useParams();
 
-  const messages = useSelector((state: StoreState) => state.messages);
+  const messages = useSelector(selectMessages, shallowEqual);
 
   // useEffect(() => {
   //   if (
