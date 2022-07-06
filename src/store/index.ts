@@ -1,9 +1,8 @@
-import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
+import { compose, combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
-import { profileReducer } from './profile/reducer';
+import { profileReducer } from './profile/slice';
 import { messageReducer } from './messages/reducer';
 
 declare global {
@@ -11,9 +10,6 @@ declare global {
         __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
     }
 }
-
-export const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export type StoreState = ReturnType<typeof rootReducer>;
 
@@ -30,9 +26,13 @@ const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = createStore(
-    persistedReducer,
-    composeEnhancers(applyMiddleware(thunk))
-);
+export const store = configureStore({ reducer: persistedReducer,
+    devTools: process.env.NODE_ENV !== 'production',
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        }
+    }),
+});
 
 export const persistor = persistStore(store);

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { StoreState } from '../store';
-import { toggleProfile } from '../store/profile/action';
+import { toggleProfile } from '../store/profile/slice';
 
 export const About: FC = (props: any) => {
     console.log('props', props);
@@ -30,5 +30,6 @@ export const AboutWithConnect = connect(
     mapStateToProps,
     mapDispatchToProps
     )(About);
+    
 
 
