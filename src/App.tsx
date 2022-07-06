@@ -8,7 +8,6 @@ import { defaultContext, ThemeContext } from './utils/ThemeContext';
 
 export const App: FC = () => {
   const [theme, setTheme] = useState(defaultContext.theme);
-
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };

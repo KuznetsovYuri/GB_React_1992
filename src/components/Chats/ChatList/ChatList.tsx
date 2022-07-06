@@ -1,31 +1,27 @@
-import { FC, useState } from 'react';
-import { nanoid } from 'nanoid';
 import { ListItem } from '@mui/material';
+import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Chat } from '../../../common-types';
+import { addChat, deleteChat } from '../../../store/messages/actions';
+import { selectChats } from '../../../store/messages/selectors';
 
-interface ChatListProps {
-  chats: Chat[];
-  onAddChat: (chat: Chat) => void;
-  onDeleteChat: (name: string) => void;
-}
-
-export const ChatList: FC<ChatListProps> = ({ chats, onAddChat, onDeleteChat }) => {
+export const ChatList: FC = () => {
   const [value, setValue] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
+  const dispatch = useDispatch();
+
+  const chats = useSelector(selectChats,
+    (prev, next) => prev.length === next.length);
+
+  useEffect(() => {
+    console.log('chat changed')
+  }, [chats])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (value) {
-      onAddChat({
-        id: nanoid(),
-        name: value,
-      });
-
+      dispatch(addChat(value));
       setValue('');
     }
   };
@@ -36,12 +32,12 @@ export const ChatList: FC<ChatListProps> = ({ chats, onAddChat, onDeleteChat }) 
         {chats.map((chat) => (
           <ListItem key={chat.id}>
             <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
-            <button onClick={() => onDeleteChat(chat.name)}>X</button>
+            <button onClick={() => dispatch(deleteChat(chat.name))}>X</button>
           </ListItem>
         ))}
       </ul>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={value} onChange={handleChange} />
+        <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
         <button>Create Chat</button>
       </form>
     </>
