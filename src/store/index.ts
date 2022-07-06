@@ -1,11 +1,16 @@
-import { createStore, compose, combineReducers } from 'redux';
-import { profileReducer, ProfileState } from './profile/reducer';
-import { messageReducer, MessagesState } from './messages/reducer'
+import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { profileReducer } from './profile/reducer';
+import { messageReducer } from './messages/reducer';
 
-// export const composeEnhancers = 
-//     window.__REDUX_DEVTOOLS_EXTENTION_COMPOSE__ || compose;
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
 
-// export const store = createStore(profileReducer, composeEnhancers());
+export const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export type StoreState = ReturnType<typeof rootReducer>;
 
@@ -16,6 +21,5 @@ const rootReducer = combineReducers({
 
 export const store = createStore(
     rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__()
-    ); 
+    composeEnhancers(applyMiddleware(thunk))
+);

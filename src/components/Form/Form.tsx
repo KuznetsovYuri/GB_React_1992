@@ -3,21 +3,23 @@ import { AUTHOR } from '../../constants';
 import { Button } from '../Button/Button';
 import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux';
-import { addMessage } from '../../store/messages/actions';
+import { addMessageWithReply } from '../../store/messages/actions';
 import { useParams } from 'react-router-dom';
+import { Authors } from '../../common-types';
+import { ThunkDispatch } from 'redux-thunk';
 
 export const Form: FC = memo(() => {
     const [text, setText] = useState('');
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
     const { chatId } = useParams();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(chatId){
-            dispatch(addMessage(chatId, text))
+        if (chatId) {
+            dispatch(addMessageWithReply(chatId, { author: Authors.USER, text }));
         }
-        
+
         setText('');
     };
 
