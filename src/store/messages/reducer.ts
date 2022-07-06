@@ -1,19 +1,14 @@
-import { act } from "@testing-library/react";
-import { nanoid } from "nanoid";
-import { Reducer } from "react";
-import { Authors } from "../../common-types";
-import { AUTHOR } from "../../constants";
-import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from "./actions";
-import { MessageActions } from "./types";
+import { nanoid } from 'nanoid';
+import { Reducer } from 'react';
+import { Message } from '../../common-types';
+import { AUTHOR } from '../../constants';
+import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from './actions';
+import { MessageActions } from './types';
 
-export interface Message {
-    id: string;
-    author: Authors;
-    text: string;
-}
+type MessageWithId = { id: string } & Message;
 
 export interface MessagesState {
-    [key: string]: Message[];
+    [key: string]: MessageWithId[];
 }
 
 const initialMessages: MessagesState = {
@@ -24,7 +19,7 @@ const initialMessages: MessagesState = {
             text: 'Hello to this chat',
         }
     ]
-}
+};
 
 
 export const messageReducer: Reducer<MessagesState, MessageActions> = (
@@ -51,8 +46,8 @@ export const messageReducer: Reducer<MessagesState, MessageActions> = (
                     ...state[action.chatName],
                     {
                         id: nanoid(),
-                        author: AUTHOR.user,
-                        text: action.text,
+                        author: action.message.author,
+                        text: action.message.text,
                     }
                    ],
                 };
