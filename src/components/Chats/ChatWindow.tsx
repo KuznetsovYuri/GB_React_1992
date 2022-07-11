@@ -1,13 +1,11 @@
-import React, { useMemo, FC, useState } from 'react';
+import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { nanoid } from 'nanoid';
 import { Header } from '../Header';
 import { Main } from '../../pages/Main';
 import { ChatList } from '../Chats/ChatList/ChatList';
 import { ChatPage } from '../../pages/Pages';
-import { useDispatch } from 'react-redux';
-import { addChat, addMessage, deleteChat } from '../../store/messages/actions';
 import { AboutWithConnect } from '../../pages/About';
+import { Articles } from '../../pages/Articles';
 
 const Profile = React.lazy(() =>
   Promise.all([
@@ -36,16 +34,17 @@ export const ChatWindow: FC = () => {
       <Route path="/" element={<Header />}>
         <Route index element={<Main />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="articles" element={<Articles />} />
         <Route path="about" element={<AboutWithConnect />} />
         <Route path="chats">
           <Route
             index
-            element={<ChatList/>}
+            element={<ChatList />}
           />
           <Route
             path=":chatId"
             element={
-              <ChatPage/>
+              <ChatPage />
             }
           />
         </Route>

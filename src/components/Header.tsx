@@ -1,3 +1,4 @@
+import React from 'react';
 import { FC } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
@@ -21,6 +22,11 @@ export const navigate = [
     id: 4,
     name: 'About',
     to: '/about',
+  },
+  {
+    id: 5,
+    name: 'Articles',
+    to: '/articles',
   },
 ];
 
