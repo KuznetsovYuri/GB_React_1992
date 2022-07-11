@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { profileReducer } from './profile/slice';
-import { messageReducer } from './messages/reducer';
+import { messagesReducer } from './messages/slice';
 
 declare global {
     interface Window {
@@ -21,12 +21,13 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     profile: profileReducer,
-    messages: messageReducer,
+    messages: messagesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({ reducer: persistedReducer,
+export const store = configureStore({
+    reducer: persistedReducer,
     devTools: process.env.NODE_ENV !== 'production',
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: {
