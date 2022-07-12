@@ -11,23 +11,31 @@ export const Articles: FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    useEffect(() => {
+    const getFetchArticles = async () => {
         setLoading(true);
         setError('');
 
-        setTimeout(() => {
-            fetch(api)
-                .then(res => res.json())
-                .then(data => setArticles(data))
-                .catch((err: Error) => setError(err.message))
-                .finally(() => setLoading(false));
-        }, 1000);
+        try {
+            const res = await fetch(api);
+            const data = await res.json();
+            setArticles(data);
+        } catch (err) {
+            setError((err as Error).message);
+        } finally {
+            setLoading(false);
+        }
+
+    };
+
+    useEffect(() => {
+        getFetchArticles();
 
     }, []);
     return (
         <>
             <h2>Articles</h2>
-            {loading && <div>Loading...</div>}
+            {loading && <p>Loading...</p>}
+            <button>get data</button>
             {!loading && (
                 <ul>
                     {articles.map(article => <li key={article.id}>{article.title}</li>)}
