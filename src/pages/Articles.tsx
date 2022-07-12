@@ -15,8 +15,14 @@ export const Articles: FC = () => {
         setLoading(true);
         setError('');
 
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
         try {
             const res = await fetch(api);
+            if(res.ok) {
+                const data = await res.json();
+                setArticles(data);
+            }
             const data = await res.json();
             setArticles(data);
         } catch (err) {
@@ -35,7 +41,7 @@ export const Articles: FC = () => {
         <>
             <h2>Articles</h2>
             {loading && <p>Loading...</p>}
-            <button>get data</button>
+            <button onClick={getFetchArticles}>get data</button>
             {!loading && (
                 <ul>
                     {articles.map(article => <li key={article.id}>{article.title}</li>)}

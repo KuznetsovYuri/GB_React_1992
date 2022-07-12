@@ -6,6 +6,7 @@ import { ChatList } from '../Chats/ChatList/ChatList';
 import { ChatPage } from '../../pages/Pages';
 import { AboutWithConnect } from '../../pages/About';
 import { Articles } from '../../pages/Articles';
+import { SignIn } from '../../pages/SignIn';
 
 const Profile = React.lazy(() =>
   Promise.all([
@@ -36,6 +37,7 @@ export const ChatWindow: FC = () => {
         <Route path="profile" element={<Profile />} />
         <Route path="articles" element={<Articles />} />
         <Route path="about" element={<AboutWithConnect />} />
+        <Route path="signin" element={<SignIn />} />
         <Route path="chats">
           <Route
             index
