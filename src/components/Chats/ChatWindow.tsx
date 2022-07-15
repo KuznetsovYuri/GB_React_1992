@@ -7,6 +7,8 @@ import { ChatPage } from '../../pages/Pages';
 import { AboutWithConnect } from '../../pages/About';
 import { Articles } from '../../pages/Articles';
 import { SignIn } from '../../pages/SignIn';
+import { PrivateRoute } from '../PrivateRoute';
+import { PublicRoute } from '../PublicRoute';
 
 const Profile = React.lazy(() =>
   Promise.all([
@@ -20,25 +22,18 @@ const Profile = React.lazy(() =>
 );
 
 export const ChatWindow: FC = () => {
-  // const chats = useMemo(
-  //   () =>
-  //     Object.keys(messages).map((chat) => ({
-  //       id: nanoid(),
-  //       name: chat,
-  //     })),
-  //   [Object.keys(messages).length]
-  // );
 
   return (
 
     <Routes>
       <Route path="/" element={<Header />}>
         <Route index element={<Main />} />
+        <Route path="profile" element={<PrivateRoute component={<Profile />} />} />
         <Route path="profile" element={<Profile />} />
         <Route path="articles" element={<Articles />} />
         <Route path="about" element={<AboutWithConnect />} />
-        <Route path="signin" element={<SignIn />} />
-        <Route path="chats">
+        <Route path="signin" element={<PublicRoute component={<SignIn />} />} />
+        <Route path="chats" element={<PrivateRoute />}>
           <Route
             index
             element={<ChatList />}
