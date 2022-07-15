@@ -3,10 +3,12 @@ import { AUTHOR } from '../../constants';
 import { Button } from '../Button/Button';
 import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux';
-import { addMessageWithReply } from '../../store/messages/actions';
+import { addMessage, addMessageWithReply } from '../../store/messages/slice';
 import { useParams } from 'react-router-dom';
 import { Authors } from '../../common-types';
 import { ThunkDispatch } from 'redux-thunk';
+import { AddMessage } from '../../store/messages/types';
+
 
 export const Form: FC = memo(() => {
     const [text, setText] = useState('');
@@ -17,7 +19,10 @@ export const Form: FC = memo(() => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (chatId) {
-            dispatch(addMessageWithReply(chatId, { author: Authors.USER, text }));
+            dispatch(addMessageWithReply({
+                chatName: chatId,
+                message: { author: Authors.USER, text }
+            }));
         }
 
         setText('');

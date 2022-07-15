@@ -1,13 +1,14 @@
-import React, { useMemo, FC, useState } from 'react';
+import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { nanoid } from 'nanoid';
 import { Header } from '../Header';
 import { Main } from '../../pages/Main';
 import { ChatList } from '../Chats/ChatList/ChatList';
 import { ChatPage } from '../../pages/Pages';
-import { useDispatch } from 'react-redux';
-import { addChat, addMessage, deleteChat } from '../../store/messages/actions';
 import { AboutWithConnect } from '../../pages/About';
+import { Articles } from '../../pages/Articles';
+import { SignIn } from '../../pages/SignIn';
+import { PrivateRoute } from '../PrivateRoute';
+import { PublicRoute } from '../PublicRoute';
 
 const Profile = React.lazy(() =>
   Promise.all([
@@ -21,31 +22,26 @@ const Profile = React.lazy(() =>
 );
 
 export const ChatWindow: FC = () => {
-  // const chats = useMemo(
-  //   () =>
-  //     Object.keys(messages).map((chat) => ({
-  //       id: nanoid(),
-  //       name: chat,
-  //     })),
-  //   [Object.keys(messages).length]
-  // );
 
   return (
 
     <Routes>
       <Route path="/" element={<Header />}>
         <Route index element={<Main />} />
+        <Route path="profile" element={<PrivateRoute component={<Profile />} />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="articles" element={<Articles />} />
         <Route path="about" element={<AboutWithConnect />} />
-        <Route path="chats">
+        <Route path="signin" element={<PublicRoute component={<SignIn />} />} />
+        <Route path="chats" element={<PrivateRoute />}>
           <Route
             index
-            element={<ChatList/>}
+            element={<ChatList />}
           />
           <Route
             path=":chatId"
             element={
-              <ChatPage/>
+              <ChatPage />
             }
           />
         </Route>
