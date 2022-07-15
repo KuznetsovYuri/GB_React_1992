@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../store/profile/slice';
 
 export const SignIn: FC = () => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    
+
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(false);
         if (login === 'gb' && password === 'gb') {
             dispatch(auth(true));
+            navigate('/', { replace: true });
         } else {
             setError(true);
         }
@@ -32,8 +35,8 @@ export const SignIn: FC = () => {
                 <input type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)} />
-                    <br />
-                    <button>LogIn</button>
+                <br />
+                <button>LogIn</button>
             </form>
             {error && <p style={{ color: 'red' }}>Invalid login or password</p>}
 
