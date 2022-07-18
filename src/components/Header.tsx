@@ -1,6 +1,6 @@
 import React from 'react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { logOut } from '../services/firebase';
 import { selectAuth } from '../store/profile/selectors';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { FC } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -24,7 +25,7 @@ const mapStateToProps = (state: StoreState) => ({
 
   const mapDispatchToProps = (dispatch: Dispatch) => ({
     toggle: () => dispatch(toggleProfile()),
-  })
+  });
 
 export const AboutWithConnect = connect(
     mapStateToProps,
