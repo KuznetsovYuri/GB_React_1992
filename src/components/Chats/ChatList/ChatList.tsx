@@ -15,8 +15,8 @@ export const ChatList: FC = () => {
     (prev, next) => prev.length === next.length);
 
   useEffect(() => {
-    console.log('chat changed')
-  }, [chats])
+    console.log('chat changed');
+  }, [chats]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

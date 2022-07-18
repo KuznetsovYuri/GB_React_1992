@@ -1,6 +1,6 @@
 import React, { FC, Suspense, useState } from 'react';
 import { Provider } from 'react-redux';
-import { ChatWindow } from './components/Chats/ChatWindow';
+import { AppRouter } from './components/Chats/AppRouter';
 import { persistor, store } from './store/index';
 import { defaultContext, ThemeContext } from './utils/ThemeContext';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -21,7 +21,7 @@ export const App: FC = () => {
           theme,
           toggleTheme,
         }}>
-          <ChatWindow />
+          <AppRouter />
         </ThemeContext.Provider>
       </Suspense>
       </PersistGate>
