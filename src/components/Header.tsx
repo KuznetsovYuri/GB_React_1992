@@ -1,9 +1,10 @@
 import React from 'react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { logOut } from '../services/firebase';
 import { selectAuth } from '../store/profile/selectors';
-import { auth } from '../store/profile/slice';
+
 
 export const nav = [
   {
@@ -36,10 +37,17 @@ export const nav = [
 export const Header: FC = () => {
   const isAuth = useSelector(selectAuth);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const handleLogin = () => {
     navigate('/signin', { replace: true });
   };
+  const handleSignUp = () => {
+    navigate('/signup', { replace: true });
+  };
+  const handleLogOut = async () => {
+    await logOut();
+  };
+
   return (
     <>
       <header
@@ -66,8 +74,19 @@ export const Header: FC = () => {
             </li>
           ))}
         </ul>
-        <div>{isAuth && <button onClick={() => dispatch(auth(false))}>LogOut</button>}</div>
-        <div>{!isAuth && <button onClick={handleLogin}>LogIn</button>}</div>
+
+        <div>{!isAuth && (
+          <>
+            <button onClick={handleLogin}>LogIn</button>
+            <button onClick={handleSignUp}>Sign Up</button>
+          </>
+        )}
+          {isAuth && (
+            <>
+              <button onClick={handleLogOut}>Logout</button>
+            </>
+          )}
+        </div>
       </header>
       <main>
         <Outlet />

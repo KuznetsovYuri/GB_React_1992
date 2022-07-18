@@ -1,9 +1,9 @@
 import React, { FC, Suspense, useState } from 'react';
 import { Provider } from 'react-redux';
-import { ChatWindow } from './components/Chats/ChatWindow';
-import { persistor, store } from './store/index';
+import { BrowserRouter } from 'react-router-dom';
+import { AppRouter } from './components/Chats/AppRouter';
+import { store } from './store/index';
 import { defaultContext, ThemeContext } from './utils/ThemeContext';
-import { PersistGate } from 'redux-persist/integration/react';
 
 
 
@@ -15,16 +15,17 @@ export const App: FC = () => {
 
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+
       <Suspense fallback={<div>Loading...</div>}>
         <ThemeContext.Provider value={{
           theme,
           toggleTheme,
         }}>
-          <ChatWindow />
+          
+            <AppRouter />
+          
         </ThemeContext.Provider>
       </Suspense>
-      </PersistGate>
     </Provider>
   );
 };
